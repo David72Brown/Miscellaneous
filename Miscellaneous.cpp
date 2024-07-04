@@ -213,7 +213,7 @@ void TestPreAndPostIncs(void)
     x = 5;
     x++;
     ++x;
-    x += 40;
+    x += 40;    // x = x + 40
     x -= 3;
     x = 0;
     x--;    // What happens to this UNSIGNED int when it is decremented below 0?
@@ -222,6 +222,14 @@ void TestPreAndPostIncs(void)
     c--;
     ++c;
     c += 1; // What happens when c is incremented above 255, which is the largest value an unsigned char can hold?
+
+    // What's the difference between x++ and ++x;
+    // The post-inc (x++) evaluates the expression containing x before incrementing x.
+    // The pre-inc (++x) does it the other way around.
+    int a = 1, b = 2;
+    a = b++;    // The expression to the right of the = sign is evaluated using the current value of b and is then assigned to a.
+                //  Only then is b incremented.
+    a = ++b;    // Here, b is incremented before its value is assigned to a.
 
     // What about inc/decrementing pointers to variables?
     int SeveralInts[] = { 10, 20, 30, 40, 50 };
@@ -243,14 +251,6 @@ void TestPreAndPostIncs(void)
         {  7, false, '$' } };
     tData *pDataItem = &DataArray[1];
     pDataItem += 1; // This causes the pointer pDataItem to skip forward several bytes so is points to the next structure in the array.
-
-    // What's the difference between x++ and ++x;
-    // The post-inc (x++) evaluates the expression containing x before incrementing x.
-    // The pre-inc (++x) does it the other way around.
-    int a = 1, b = 2;
-    a = b++;    // The expression to the right of the = sign is evaluated using the current value of b and is then assigned to a.
-                //  Only then is b incremented.
-    a = ++b;    // Here, b is incremented before its value is assigned to a.
 }
 
 int main()
@@ -258,7 +258,7 @@ int main()
     // Uncomment the thing you want to work on:
     // DemoIfsAndLoops();
     // OptimizeForLoop();
-    // DemoPassByValPtrOrRef();
     // TestFactorialCalcs();
     TestPreAndPostIncs();
+    DemoPassByValPtrOrRef();
 }
